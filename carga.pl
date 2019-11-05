@@ -36,9 +36,25 @@
 %     Materias > 0,
 %     write(Materias).
 
-wireN(Semester):- format("------Semestre ~a ---------", [Semester]), nl.
+writeAllSubjectsWithCredits(CarryList):-
+    length(CarryList, L),
+    L > 0,
+    [ Current | T] = CarryList,
+    [ Name, Credits | _ ] = Current,
+    format("Nombre de materia: ~a", [Name]),
+    nl,
+    format("Creditos de la materia: ~a", [Credits]),
+    nl,
+    write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
+    nl,
+    writeAllSubjectsWithCredits(T).
 
-iterateOverSemesters(Start, [], End):-
+wireN(Semester):- 
+    ansi_format([underline,fg(red)], 
+        '--------------- Semestre ~a ---------------', 
+        [Semester]), nl.
+
+optimalCharge(Start, [], End):-
     NextSemester is Start + 1,
     NextSemester =< End,
     getAllSubjects(Start, CarryList),
@@ -47,12 +63,19 @@ iterateOverSemesters(Start, [], End):-
     (L > 0 -> NextList = CarryList ; NextList = []),
     (L > 0 -> wireN(Start) ; (
         NextAux is Start + 1,
-        iterateOverSemesters(NextAux, [], End))),
-    % ([ H | _ ] = CarryList ; CarryList),
-    [H | _] = CarryList,
-    write(H),
+        optimalCharge(NextAux, [], End))),
+    % from here CarryList is never empty
+    calcCreditsBySubjectsList(CarryList, Total),
+    ansi_format([underline,fg(cyan)], 
+        'Creditos obtenidos este semestre ~a', 
+        [Total]),
+    % format("Creditos obtenidos este semestre [~a]", [Total]),
     nl,
-    iterateOverSemesters(NextSemester, NextList, End).
+    writeAllSubjectsWithCredits(CarryList),
+    nl,
+    
+    % format("[Creditos obtenidos este semestre : ~a]", [Total]),
+    optimalCharge(NextSemester, NextList, End).
 
 getAllSubjects(X, Materias):-
     materiaSemestre(X, Materias).

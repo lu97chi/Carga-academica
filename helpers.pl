@@ -1,20 +1,40 @@
 :- ensure_loaded(materias).
 :- ensure_loaded(materiasSemestre).
 
+% [[inteligencia_artificial,4,3],[ingenieria_web,4,3],[proyecto_integrador_de_ingenieria_de_software,5,3],[residencias,0,3]]
+
 member(X,[X|_]).
 member(X,[_|T]):- member(X,T).
 
 pushToFront(Item, List, [Item | List]).
 
 % calcular los creditos por materia
-calcCreditsBySubjects([], 0).
-calcCreditsBySubjects(X, Counter):-
-    length(X, Iterations),
-    Iterations > 0,
-    [H | T] = X,
-    materia(H, Creditos, _, _),
-    calcCreditsBySubjects(T, AuxC),
-    Counter is AuxC + Creditos.
+% calcCreditsBySubjects([], 0).
+% calcCreditsBySubjects(X, Counter):-
+%     length(X, Iterations),
+%     Iterations > 0,
+%     [H | T] = X,
+%     materia(H, Creditos, _, _),
+%     calcCreditsBySubjects(T, AuxC),
+%     Counter is AuxC + Creditos.
+
+% calcCreditsBySubjects2([], 0).
+% getSubjectsIndividual([], []).
+% getSubjectsIndividual(List, []):-
+%     [ Name | _ ] = List,
+%     pushToFront(Name, [], Payload),
+%     getSubjectsIndividual(L,Payload).
+
+%[[a,s],[d,f],[g,h]]
+calcCreditsBySubjectsList([], 0).
+calcCreditsBySubjectsList(List, Counter):-
+    length(List, L),
+    L > 0,
+    [ Current | Remaning ] = List,
+    [ _ , Credits | _ ] = Current,
+    calcCreditsBySubjectsList(Remaning, AuxC),
+    Counter is AuxC + Credits.
+
 
 % calcular creditos minimos
 % esta funcion se encarga de tomar las materias necesarias para completar los creditos
