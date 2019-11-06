@@ -4,9 +4,9 @@
 4 - ¿Como puedo guardar el nombre de todas las materias en una lista, se vale poner todas en una lista?
 
 
-checks
+checks basics, no rc no especial
 Semestre            Trabaja          DefaultData           Status
 1                   No               NotRelevant           Done
 1                   Si               NotRelevant           Done
-!= 1                No               YES                   Done    
+!= 1                No               YES                       
 != 1                Si               YES                   Done   

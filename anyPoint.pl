@@ -22,10 +22,12 @@ validateIfCouldEnd(Start,End, CreditsPerSemester, SUBJECTS):-
         insertSubjectsByKeyboard(SUBJECTS)),
     calcCreditsBySubjects(SUBJECTS, TotalCreditsSoFar),
     Remaning is End - Start,
+    write(Remaning),
     PosibleCredits is Remaning * 36,
     RemaningCredits is 260 - TotalCreditsSoFar,
     (PosibleCredits < RemaningCredits -> 
-        write("No podras graduarte, sorry") ; 
+        throw("No podras graduarte, sorry")
+        ; 
         (validateSubjectsGiven(SUBJECTS, SUBJECTS) -> 
             write("OK, Empezemos") ;
             write("No es una carga valida"), 

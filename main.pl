@@ -24,25 +24,19 @@ start:-
             allSubjectsInOrder(ALL),
             workCharge(ALL, 0, [], START) 
             ;
-            allSubjectsInOrder(ALL),
-            % START != 1
-            validateIfCouldEnd(START, MaxSemesters, CreditsPerSemester, SUBJECTS),
-            nl,
-            % at this point the charge is valid and has the subjects
-            delete(SUBJECTS, ALL, REMANING),
+            loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
+            % at this point the charge is valid, has the subjects and can end the school
             % loadFailSubjects(RC, ESPECIAL),
-            % (RC == 'si' -> 
-            %     write("in progress") 
-            % ;
-                
-            % )
             workCharge(REMANING, 0, [], START)
         ) 
     ; 
         (
             START == 1 -> 
             optimalCharge(START, [], MaxSemesters) 
-            ; 
+            ;
+            loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
+            % at this point the charge is valid, has the subjects and can end the school
+            chargeNonWork(REMANING, 0, [], START),
             write("Still on progress")
         )
     ).
