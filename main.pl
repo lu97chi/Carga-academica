@@ -12,49 +12,40 @@
 start:-
     write("¿El alumno trabaja? (responda si / no)"),
     read(WORK),
-    % write("¿Usar por defecto?"),
-    % read(DEFAULT),
-    % (DEFAULT == 'si' -> 
-    %     loadDefaultData(Materias, Actual) ; 
-    %     insertData(Materias, Actual)),
     (WORK == 'si' -> 
         MaxSemesters = 12, CreditsPerSemester = 20 ; 
         MaxSemesters = 13, CreditsPerSemester = 36),
     write("¿En que semestre empezaremos?"),
     read(START),
-    (WORK == 'si' -> 
+    (
+        WORK == 'si' -> 
         (
             START == 1 -> 
             allSubjectsInOrder(ALL),
-            workCharge(ALL, 0, [], START) ;
+            workCharge(ALL, 0, [], START) 
+            ;
             allSubjectsInOrder(ALL),
             % START != 1
-            validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester, SUBJECTS),
+            validateIfCouldEnd(START, MaxSemesters, CreditsPerSemester, SUBJECTS),
             nl,
-            % at this point the charge is valid and i has the subjects
-            % write(SUBJECTS),
+            % at this point the charge is valid and has the subjects
             delete(SUBJECTS, ALL, REMANING),
-            workCharge(REMANING, 0, [], START)
-            % (
-            %     DEFAULTDATA == 'si' -> 
-            %     write("algo")
-            %     % validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester),
-            %     % materiasCursadas(COURSED),
-            %     % delete(COURSED, ALL, REMANING),
-            %     % workCharge(REMANING, 0, [], START) 
-            %     ;
-            %     write("STill in progress to insert materias cursadas y trabajo")
+            % loadFailSubjects(RC, ESPECIAL),
+            % (RC == 'si' -> 
+            %     write("in progress") 
+            % ;
+                
             % )
-        ) ; 
+            workCharge(REMANING, 0, [], START)
+        ) 
+    ; 
         (
             START == 1 -> 
-            optimalCharge(START, [], MaxSemesters) ; 
+            optimalCharge(START, [], MaxSemesters) 
+            ; 
             write("Still on progress")
         )
     ).
-    % Load optimal charge
-
-% validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester)
 
 % if (!work) {
 %     if (semester == 1) {

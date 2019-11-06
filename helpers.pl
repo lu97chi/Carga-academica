@@ -92,27 +92,28 @@ getSubjects([ActualSubject | T]):-
     getSubjects(T).
 
  % in progress
-addSubjectsToList(1, 1).
-addSubjectsToList(Start, End):-
-    Next is Start + 1,
-    Start =< End,
-    materiaSemestre(Start, Subjects),
-    length(Subjects, L),
-    L > 0,
-    getSubjects(Subjects),
-    nl,
-    % assert(actualSubjects(Subjects)),
-    addSubjectsToList(Next, End).
+% addSubjectsToList(1, 1).
+% addSubjectsToList(Start, End):-
+%     Next is Start + 1,
+%     Start =< End,
+%     materiaSemestre(Start, Subjects),
+%     length(Subjects, L),
+%     L > 0,
+%     getSubjects(Subjects),
+%     nl,
+%     % assert(actualSubjects(Subjects)),
+%     addSubjectsToList(Next, End).
 
 
 % obtenerMateriasPorDificultad(X1,X2,D,X4):- materia(X1,X2,D,X4).
 % obtenerMateriasPorCreditos(X1, C, X3,X4):- materia(X1, C, X3,X4).
 % obtenerMateriaPorSemestreMinimo(X1, X2, X3, M):- materia(X1,X2,X3,M).
 
-% eliminar materias cursadas
+
 isNonElement(_, []).
 isNonElement(X, [H | T]) :- dif(X, H), isNonElement(X,T).
 
+% eliminar materias cursadas
 % listToDelete, listFromDelete, listWithDeletion
 % con esta funcion me regresa la lista de las materias pendientes, solo resta iterar sobre ellas
 % no hay que validar que una este seriada de otra, al estar en orden se tomara ese orden

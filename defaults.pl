@@ -18,4 +18,6 @@ materiasCursadas([
 %     ]).
 
 materiasReprobadas([tallerEtica]).
+
+especiales([calculoIntegral]).
 semestreActual(2).
