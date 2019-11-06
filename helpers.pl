@@ -9,14 +9,14 @@ member(X,[_|T]):- member(X,T).
 pushToFront(Item, List, [Item | List]).
 
 % calcular los creditos por materia
-% calcCreditsBySubjects([], 0).
-% calcCreditsBySubjects(X, Counter):-
-%     length(X, Iterations),
-%     Iterations > 0,
-%     [H | T] = X,
-%     materia(H, Creditos, _, _),
-%     calcCreditsBySubjects(T, AuxC),
-%     Counter is AuxC + Creditos.
+calcCreditsBySubjects([], 0).
+calcCreditsBySubjects(X, Counter):-
+    length(X, Iterations),
+    Iterations > 0,
+    [H | T] = X,
+    materia(H, Creditos, _, _),
+    calcCreditsBySubjects(T, AuxC),
+    Counter is AuxC + Creditos.
 
 % calcCreditsBySubjects2([], 0).
 % getSubjectsIndividual([], []).

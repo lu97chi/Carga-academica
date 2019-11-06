@@ -1,2 +1,10 @@
-materiasCursadas([tallerEtica, tallerAdministracion]).
+materiasCursadas([
+        calculoDiferencial, 
+        fundamentosProgramacion,
+        tallerEtica,
+        matematicasDiscretas,
+        tallerAdministracion,
+        fundamentosInvestigacion,
+        actividadesComplementarias
+    ]).
 semestreActual(2).

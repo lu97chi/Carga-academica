@@ -69,12 +69,9 @@ optimalCharge(Start, [], End):-
     ansi_format([underline,fg(cyan)], 
         'Creditos obtenidos este semestre ~a', 
         [Total]),
-    % format("Creditos obtenidos este semestre [~a]", [Total]),
     nl,
     writeAllSubjectsWithCredits(CarryList),
     nl,
-    
-    % format("[Creditos obtenidos este semestre : ~a]", [Total]),
     optimalCharge(NextSemester, NextList, End).
 
 getAllSubjects(X, Materias):-
