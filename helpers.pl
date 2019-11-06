@@ -8,6 +8,34 @@ member(X,[_|T]):- member(X,T).
 
 pushToFront(Item, List, [Item | List]).
 
+% cable que separa cada semestre
+wireN(Semester):- 
+    ansi_format([underline,fg(red)], 
+        '--------------- Semestre ~a ---------------', 
+        [Semester]), nl.
+
+% escritura de creditos totales
+formatWriteTotalCredits(Total):-
+    ansi_format([underline,fg(cyan)], 
+        'Creditos obtenidos este semestre ~a', 
+        [Total]),
+    nl.
+
+% formateador que escribe bonito el texto
+writeAllSubjectsWithCredits(CarryList):-
+    length(CarryList, L),
+    L > 0,
+    [ Current | T] = CarryList,
+    [ Name, Credits | _ ] = Current,
+    format("Nombre de materia: ~a", [Name]),
+    nl,
+    format("Creditos de la materia: ~a", [Credits]),
+    nl,
+    write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
+    nl,
+    writeAllSubjectsWithCredits(T).
+
+
 % calcular los creditos por materia
 calcCreditsBySubjects([], 0).
 calcCreditsBySubjects(X, Counter):-

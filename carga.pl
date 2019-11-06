@@ -36,25 +36,8 @@
 %     Materias > 0,
 %     write(Materias).
 
-% formateador que escribe bonito el texto
-writeAllSubjectsWithCredits(CarryList):-
-    length(CarryList, L),
-    L > 0,
-    [ Current | T] = CarryList,
-    [ Name, Credits | _ ] = Current,
-    format("Nombre de materia: ~a", [Name]),
-    nl,
-    format("Creditos de la materia: ~a", [Credits]),
-    nl,
-    write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
-    nl,
-    writeAllSubjectsWithCredits(T).
 
-% cable que separa cada semestre
-wireN(Semester):- 
-    ansi_format([underline,fg(red)], 
-        '--------------- Semestre ~a ---------------', 
-        [Semester]), nl.
+
 
 % este se encarga de dar la mejor carga posible, cuando un alumno no trabaja y esta en semestre 1
 optimalCharge(Start, [], End):-
@@ -69,10 +52,7 @@ optimalCharge(Start, [], End):-
         optimalCharge(NextAux, [], End))),
     % from here CarryList is never empty
     calcCreditsBySubjectsList(CarryList, Total),
-    ansi_format([underline,fg(cyan)], 
-        'Creditos obtenidos este semestre ~a', 
-        [Total]),
-    nl,
+    formatWriteTotalCredits(Total),
     writeAllSubjectsWithCredits(CarryList),
     nl,
     optimalCharge(NextSemester, NextList, End).

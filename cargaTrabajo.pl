@@ -3,28 +3,33 @@
 % impriremos en pantalla las materias que lleva y el semestre que se encuentra
 % hacemos que sea 0 el acumulado y sumamos 1 al semestre
 :- ensure_loaded(helpers).
+:- ensure_loaded(materias).
+:- ensure_loaded(helpers).
+
 :- dynamic(counting/1).
 counting().
 
 % recorre la lista, cuando sea mayor a 20, toma los elementos pasados
 % y ese sera tu semestre
 
-workCharge([], 0, []).
-workCharge(Subjects, Counter, Semester):-
+% test -> 
+% workCharge([calculoDiferencial, fundamentosProgramacion, tallerEtica, matematicasDiscretas, tallerAdministracion, fundamentosInvestigacion, calculoIntegral, programacionOrientadaObjectos, contabilidadFinanciera, quimica, algebraLineal, probabilidadEstadistica, calculoVectorial, estructuraDatos, culturaEmpresarial], 0, [], 3).
+% no imprime el restante si no es mayor a 20
+workCharge([], 0, [], 1).
+workCharge(Subjects, Counter, Semester, SemesterInNumber):-
     length(Subjects, L),
     L > 0,
-    % this head will be removed
-    [ H | T] = Subjects,
-    AuxCounter is Counter + H,
+    [ SubjectName | T ] = Subjects,
+    materia(SubjectName, Credits, _, _),
+    AuxCounter is Counter + Credits,
+    AuxSubject = [SubjectName, Credits | _],
     (AuxCounter > 20 -> 
-        write("Carga academica"),
-        nl,
-        write(Semester),
-        nl,
-        workCharge(T, 0, [H]);
-        pushToFront(H, Semester, ActualCharge)
+        NextSemester is SemesterInNumber + 1,
+        wireN(SemesterInNumber),
+        formatWriteTotalCredits(AuxCounter),
+        (writeAllSubjectsWithCredits(Semester) -> 
+            writeAllSubjectsWithCredits(Semester) ; write('')),
+        workCharge(T, 0, [AuxSubject], NextSemester);
+        pushToFront(AuxSubject, Semester, ActualCharge)
         ),
-    write("REST"),nl,
-    write(T),
-    nl,
-    workCharge(T, AuxCounter, ActualCharge).
+    workCharge(T, AuxCounter, ActualCharge, SemesterInNumber).

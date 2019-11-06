@@ -1,3 +1,4 @@
-1 - ¿Voy bien?
+1 - ¿Voy bien? jeje
 2 - ¿Como puedo hacer un predicado que me guarde cada elemento y me regrese una lista de una dimension?
 3 - Assert Retract, ejemplo de como usar
+4 - ¿Como puedo guardar el nombre de todas las materias en una lista, se vale poner todas en una lista?
