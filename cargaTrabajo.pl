@@ -14,7 +14,9 @@ counting().
 
 % test -> 
 % workCharge([calculoDiferencial, fundamentosProgramacion, tallerEtica, matematicasDiscretas, tallerAdministracion, fundamentosInvestigacion, calculoIntegral, programacionOrientadaObjectos, contabilidadFinanciera, quimica, algebraLineal, probabilidadEstadistica, calculoVectorial, estructuraDatos, culturaEmpresarial], 0, [], 3).
-% no imprime el restante si no es mayor a 20
+% workCharge([calculoDiferencial, fundamentosProgramacion, tallerEtica, matematicasDiscretas, tallerAdministracion, fundamentosInvestigacion, calculoIntegral, programacionOrientadaObjectos, contabilidadFinanciera, quimica, algebraLineal, probabilidadEstadistica, calculoVectorial, estructuraDatos, culturaEmpresarial, investigacionDeOperaciones,desarrolloSustentable,fisica,ecuacionesDiferenciales,metodosNumericos,topicosAvanadosDeProgramacion,fundamentosBaseDeDatos,simulacion,principiosEletectricos,graficacion,fundamentosTelecomunicaciones,sistemasOperativos,tallerBaseDeDatos,fundamentosIngenieriaSoftware,arquitecturaDeComputadoras,lenguagesYAtuomotas,redesComputadoras,tallerSistemasOperativos,administracionBaseDatos,ingeneriaSoftware,lenguajesDeInterfaz,temasSelectosBaseDatos,lenguagesYAtuomotas2,conmutacionYEnrutamiento,tallerInvestigacion1,pruebasSoftware,gestionProyectosSoftware,sistemasProgramables,programacionLogicaFuncional,administracionRedes,tallerInvestigacion2,programacionWeb,metodosAgiles,arquitecturaSoftware,mantenimientoSoftware,inteligenciaArtificial,ingenieriaWeb,proyectoIntegrador ], 0, [], 3).
+
+% worst case, work and semester is any
 workCharge([], 0, [], 1).
 workCharge(Subjects, Counter, Semester, SemesterInNumber):-
     length(Subjects, L),

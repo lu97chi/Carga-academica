@@ -65,3 +65,20 @@ materia(inteligenciaArtificial,4,4,9).
 materia(ingenieriaWeb, 4,4,9).
 materia(proyectoIntegrador, 5,4,9).
 materia(residencia, 10,4,9).
+
+allSubjectsInOrder([calculoDiferencial, fundamentosProgramacion, tallerEtica, matematicasDiscretas, 
+    tallerAdministracion, fundamentosInvestigacion, calculoIntegral, 
+    programacionOrientadaObjectos, contabilidadFinanciera, quimica,
+     algebraLineal, probabilidadEstadistica, calculoVectorial,
+      estructuraDatos, culturaEmpresarial, investigacionDeOperaciones,
+      desarrolloSustentable,fisica,ecuacionesDiferenciales,metodosNumericos,
+      topicosAvanadosDeProgramacion,fundamentosBaseDeDatos,simulacion,
+      principiosEletectricos,graficacion,fundamentosTelecomunicaciones,
+      sistemasOperativos,tallerBaseDeDatos,fundamentosIngenieriaSoftware,
+      arquitecturaDeComputadoras,lenguagesYAtuomotas,redesComputadoras,tallerSistemasOperativos,
+      administracionBaseDatos,ingeneriaSoftware,lenguajesDeInterfaz,temasSelectosBaseDatos,
+      lenguagesYAtuomotas2,conmutacionYEnrutamiento,tallerInvestigacion1,
+      pruebasSoftware,gestionProyectosSoftware,sistemasProgramables,programacionLogicaFuncional,
+      administracionRedes,tallerInvestigacion2,programacionWeb,
+      metodosAgiles,arquitecturaSoftware,mantenimientoSoftware,inteligenciaArtificial,
+      ingenieriaWeb,proyectoIntegrador ]).
