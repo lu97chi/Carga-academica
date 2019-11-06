@@ -36,6 +36,7 @@
 %     Materias > 0,
 %     write(Materias).
 
+% formateador que escribe bonito el texto
 writeAllSubjectsWithCredits(CarryList):-
     length(CarryList, L),
     L > 0,
@@ -49,11 +50,13 @@ writeAllSubjectsWithCredits(CarryList):-
     nl,
     writeAllSubjectsWithCredits(T).
 
+% cable que separa cada semestre
 wireN(Semester):- 
     ansi_format([underline,fg(red)], 
         '--------------- Semestre ~a ---------------', 
         [Semester]), nl.
 
+% este se encarga de dar la mejor carga posible, cuando un alumno no trabaja y esta en semestre 1
 optimalCharge(Start, [], End):-
     NextSemester is Start + 1,
     NextSemester =< End,
@@ -74,5 +77,6 @@ optimalCharge(Start, [], End):-
     nl,
     optimalCharge(NextSemester, NextList, End).
 
+% funcion que regresa todas las materias de X semestre
 getAllSubjects(X, Materias):-
     materiaSemestre(X, Materias).

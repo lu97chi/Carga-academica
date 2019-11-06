@@ -1,0 +1,3 @@
+1 - ¿Voy bien?
+2 - ¿Como puedo hacer un predicado que me guarde cada elemento y me regrese una lista de una dimension?
+3 - Assert Retract, ejemplo de como usar

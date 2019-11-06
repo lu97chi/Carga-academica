@@ -6,6 +6,7 @@
 :- ensure_loaded(anyPoint).
 
 % optimal charge is for not working and semester 1
+% optimal Charge is done
 start:-
     write("¿El alumno trabaja? (responda si / no)"),
     read(WORK),

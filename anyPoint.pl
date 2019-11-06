@@ -2,7 +2,14 @@
 :- ensure_loaded(carga).
 :- ensure_loaded(seriadas).
 :- ensure_loaded(defaults).
+:- ensure_loaded(materiasSemestre).
+:- ensure_loaded(materias).
 
+:- dynamic(actualSubjects/1).
+
+actualSubjects.
+
+% se usa este si no se quiere usar la carga por defecto
 insertSubjectsByKeyboard(SUBJECTS):-
     write("Ingrese las materias cursadas, con el formato [nombre_materia, nombre_materia2]"),
     read(SUBJECTS).
@@ -45,4 +52,19 @@ validateSubjectsGiven(SUBJECTS):-
 % eliminar de la lista las materias llevadas
 % Materias = Materias cursadas y pasadas
 optimalChargeSemesterRuning(Start, Materias, End, CreditsPerSemester, TotalCreditsSoFar):-
-    write(Start).
+    materia(Nombre, Credits, _, _),
+    actualSubjects(X),
+    pushToFront(Nombre, X, NewList),
+    assert(actualSubjects(NewList)).
+
+% formateador de texto para que se vea bonito
+writer(Semester, Name, Credits):-
+    ansi_format([underline,fg(red)], 
+        '--------------- Semestre ~a ---------------', 
+        [Semester]), nl,
+        format("Nombre de materia: ~a", [Name]),
+        nl,
+        format("Creditos de la materia: ~a", [Credits]),
+        nl,
+        write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
+        nl.
