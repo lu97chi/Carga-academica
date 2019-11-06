@@ -51,7 +51,7 @@ loadFailSubjects(RC, ESPECIAL):-
             read(RC)
         )
         ;
-        RC = []
+        RC = 0
     ),
     write("¿Tienes materias especiales?"),
     read(ESPECIALSTATUS),
@@ -65,5 +65,5 @@ loadFailSubjects(RC, ESPECIAL):-
             read(ESPECIAL)
         )
         ;
-        ESPECIAL = []    
+        ESPECIAL = 0 
     ).

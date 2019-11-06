@@ -64,7 +64,6 @@ calcCreditsBySubjectsList(List, Counter):-
     calcCreditsBySubjectsList(Remaning, AuxC),
     Counter is AuxC + Credits.
 
-
 % calcular creditos minimos
 % esta funcion se encarga de tomar las materias necesarias para completar los creditos
 % minimos, los cuales son 20, como se hace eso, se toma de referencia el semestre

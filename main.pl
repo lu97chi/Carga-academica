@@ -26,8 +26,12 @@ start:-
             ;
             loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
             % at this point the charge is valid, has the subjects and can end the school
-            % loadFailSubjects(RC, ESPECIAL),
-            workCharge(REMANING, 0, [], START)
+            loadFailSubjects(RC, ESPECIAL),
+            (RC = 0, ESPECIAL = 0 -> 
+                workCharge(REMANING, 0, [], START)
+                ;
+                write("WORK IN PROGRESS")
+            )
         ) 
     ; 
         (
@@ -36,8 +40,12 @@ start:-
             ;
             loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
             % at this point the charge is valid, has the subjects and can end the school
-            chargeNonWork(REMANING, 0, [], START),
-            write("Still on progress")
+            loadFailSubjects(RC, ESPECIAL),
+            (RC == 0, ESPECIAL == 0 -> 
+                chargeNonWork(REMANING, 0, [], START)
+                ;
+                write("WORK IN PROGRESS")
+            )
         )
     ).
 
