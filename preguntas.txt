@@ -8,5 +8,5 @@ checks
 Semestre            Trabaja          DefaultData           Status
 1                   No               NotRelevant           Done
 1                   Si               NotRelevant           Done
-!= 1                No                  
-!= 1                Si                  
+!= 1                No               YES                   Done    
+!= 1                Si               YES                   Done   

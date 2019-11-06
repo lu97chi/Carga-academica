@@ -27,17 +27,24 @@ start:-
             START == 1 -> 
             allSubjectsInOrder(ALL),
             workCharge(ALL, 0, [], START) ;
+            allSubjectsInOrder(ALL),
             % START != 1
-            write("¿Usar carga por defecto?"),
-            read(DEFAULTDATA),
-            (
-                DEFAULTDATA == 'si' -> 
-                validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester),
-                materiasCursadas(COURSED),
-                delete(COURSED, ALL, REMANING),
-                workCharge(REMANING, 0, [], START) ;
-                write("STill in progress to insert materias cursadas y trabajo")
-            )
+            validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester, SUBJECTS),
+            nl,
+            % at this point the charge is valid and i has the subjects
+            % write(SUBJECTS),
+            delete(SUBJECTS, ALL, REMANING),
+            workCharge(REMANING, 0, [], START)
+            % (
+            %     DEFAULTDATA == 'si' -> 
+            %     write("algo")
+            %     % validateIfCouldEnd(START, [], MaxSemesters, CreditsPerSemester),
+            %     % materiasCursadas(COURSED),
+            %     % delete(COURSED, ALL, REMANING),
+            %     % workCharge(REMANING, 0, [], START) 
+            %     ;
+            %     write("STill in progress to insert materias cursadas y trabajo")
+            % )
         ) ; 
         (
             START == 1 -> 

@@ -14,7 +14,7 @@ insertSubjectsByKeyboard(SUBJECTS):-
     write("Ingrese las materias cursadas, con el formato [nombre_materia, nombre_materia2]"),
     read(SUBJECTS).
 
-validateIfCouldEnd(Start,Materias,End, CreditsPerSemester):- 
+validateIfCouldEnd(Start,Materias,End, CreditsPerSemester, SUBJECTS):- 
     write("Desea usar el ejemplo de materias? (si = usar por defecto, no = entrar por teclado)"),
     read(DEFAULT),
     (DEFAULT == 'si' -> 
@@ -27,10 +27,11 @@ validateIfCouldEnd(Start,Materias,End, CreditsPerSemester):-
     (PosibleCredits < RemaningCredits -> 
         write("No podras graduarte, sorry") ; 
         (validateSubjectsGiven(SUBJECTS) -> 
-            optimalChargeSemesterRuning(Start, SUBJECTS, End, CreditsPerSemester, TotalCreditsSoFar) ;
+            % optimalChargeSemesterRuning(Start, SUBJECTS, End, CreditsPerSemester, TotalCreditsSoFar) ;
+            write("OK, Empezemos") ;
             write("No es una carga valida"), 
             nl,
-            validateIfCouldEnd(Start, Materias, End, CreditsPerSemester))).
+            validateIfCouldEnd(Start, Materias, End, CreditsPerSemester, SUBJECTS))).
         % optimalChargeSemesterRuning(Start, Materias, End, CreditsPerSemester, TotalCreditsSoFar)).
 
 % toma la cabeza, buscala en la base de seriadas
