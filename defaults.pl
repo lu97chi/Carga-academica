@@ -19,5 +19,6 @@ materiasCursadas([
 
 materiasReprobadas([tallerEtica]).
 
-especiales([calculoIntegral]).
+% especiales([calculoIntegral, calculoVectorial, graficacion, simulacion]).
+especiales([calculoIntegral, calculoVectorial]).
 semestreActual(2).

@@ -5,6 +5,7 @@
 :- ensure_loaded(carga).
 :- ensure_loaded(anyPoint).
 :- ensure_loaded(cargaTrabajo).
+:- ensure_loaded(cargaEspecial).
 
 
 % optimal charge is for not working and semester 1
@@ -25,12 +26,14 @@ start:-
             workCharge(ALL, 0, [], START) 
             ;
             loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
-            % at this point the charge is valid, has the subjects and can end the school
+            % at this point the charge is valid, 
+            %has the subjects and can end the school
             loadFailSubjects(RC, ESPECIAL),
             (RC = 0, ESPECIAL = 0 -> 
                 workCharge(REMANING, 0, [], START)
                 ;
-                write("WORK IN PROGRESS")
+                % at this point we have a list of RCs !OR! a list of Especials
+                chargeWithFailures(ESPECIAL, RC, REMANING, START, CreditsPerSemester)
             )
         ) 
     ; 
@@ -44,6 +47,7 @@ start:-
             (RC == 0, ESPECIAL == 0 -> 
                 chargeNonWork(REMANING, 0, [], START)
                 ;
+                % at this point we have a list of RCs !OR! a list of Especials
                 write("WORK IN PROGRESS")
             )
         )

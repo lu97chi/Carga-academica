@@ -119,3 +119,7 @@ isNonElement(X, [H | T]) :- dif(X, H), isNonElement(X,T).
 delete(_, [], []).
 delete(Y, [H | T], Z):- member(H, Y), delete(Y, T, Z).
 delete(Y, [H | T], [H | Z]) :- isNonElement(H, Y), delete(Y, T, Z).
+
+append([], List, List).
+append([Head|Tail], List, [Head|Rest]) :-
+    append(Tail, List, Rest).

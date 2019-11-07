@@ -2,11 +2,14 @@
 2 - ¿Como puedo hacer un predicado que me guarde cada elemento y me regrese una lista de una dimension?
 3 - Assert Retract, ejemplo de como usar
 4 - ¿Como puedo guardar el nombre de todas las materias en una lista, se vale poner todas en una lista?
-
+5 - ¿Como puedo eliminar los especiales que ya tengo?
 
 checks basics, no rc no especial
 Semestre            Trabaja          DefaultData           Status
 1                   No               NotRelevant           Done
 1                   Si               NotRelevant           Done
-!= 1                No               YES                       
-!= 1                Si               YES                   Done   
+!= 1                No               YES                   Done    
+!= 1                Si               YES                   Done
+
+
+checks with Rc or Especial
