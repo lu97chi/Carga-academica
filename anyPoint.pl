@@ -34,20 +34,6 @@ validateIfCouldEnd(Start,End, CreditsPerSemester, SUBJECTS):-
             nl,
             validateIfCouldEnd(Start, End, CreditsPerSemester, _))).
 
-% toma la cabeza, buscala en la base de seriadas
-% si la cabeza no esta en ninguna de las seriadas continua
-% si no, busca la que esta antes en la lista de materias que
-% tienes
-% validateSubjectsGiven([]).
-% validateSubjectsGiven(SUBJECTS):-
-%     length(SUBJECTS, L),
-%     L > 0,
-%     [ H | T] = SUBJECTS,
-%     (seriada(H, Requisite) -> 
-%         member(Requisite, SUBJECTS) ; 
-%         validateSubjectsGiven(T)),
-%     validateSubjectsGiven(T).
-
 validateSubjectsGiven(_, []).
 validateSubjectsGiven(SUBJECTS, CarryList):-
     length(CarryList, L),
@@ -57,6 +43,3 @@ validateSubjectsGiven(SUBJECTS, CarryList):-
         member(Requisite, SUBJECTS), validateSubjectsGiven(SUBJECTS, T) ; 
         validateSubjectsGiven(SUBJECTS, T)).
 
-
-% [tallerEtica, calculoDiferencial, calculoIntegral]
-% [tallerEtica, calculoIntegral, calculoDiferencial]

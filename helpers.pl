@@ -46,13 +46,6 @@ calcCreditsBySubjects(X, Counter):-
     calcCreditsBySubjects(T, AuxC),
     Counter is AuxC + Creditos.
 
-% calcCreditsBySubjects2([], 0).
-% getSubjectsIndividual([], []).
-% getSubjectsIndividual(List, []):-
-%     [ Name | _ ] = List,
-%     pushToFront(Name, [], Payload),
-%     getSubjectsIndividual(L,Payload).
-
 %[[a,s],[d,f],[g,h]]
 % calcula los creditos de una lista de listas de materias
 calcCreditsBySubjectsList([], 0).
@@ -64,24 +57,6 @@ calcCreditsBySubjectsList(List, Counter):-
     calcCreditsBySubjectsList(Remaning, AuxC),
     Counter is AuxC + Credits.
 
-% calcular creditos minimos
-% esta funcion se encarga de tomar las materias necesarias para completar los creditos
-% minimos, los cuales son 20, como se hace eso, se toma de referencia el semestre
-% que se encuentra y se agrupan en una lista y esa es una respuesta para ese semestre
-% las siguientes respuestas no se toma en cuenta el semestre, ya que no importara eso
-% pero no te puede dar una materia que aun no llevas
-% calcMinimunCredits(0, MaxSemester, _) :- MaxSemester = 12 ; MaxSemester = 13.
-% calcMinimunCredits(Acc, MaxSemster, CurrentSemester, MateriasSeleccionadas):-
-%     NextSemester is CurrentSemester + 1,
-%     NextSemester =< MaxSemster,
-%     materiaSemestre(CurrentSemester, Materias),
-%     [ Nombre | _ ] = Materias,
-%     calcMinimunCredits(AuxAcc, MaxSemster, NextSemester, Nombre),
-%     Acc is AuxAcc + 5,
-%     MateriasSeleccionadas is Nombre.
-% calcular creditos maximos
-
-
 % regresa materia individualmente
 getSubjects([], []).
 getSubjects([ActualSubject | T]):-
@@ -89,25 +64,6 @@ getSubjects([ActualSubject | T]):-
     write(SubjectName),
     nl,
     getSubjects(T).
-
- % in progress
-% addSubjectsToList(1, 1).
-% addSubjectsToList(Start, End):-
-%     Next is Start + 1,
-%     Start =< End,
-%     materiaSemestre(Start, Subjects),
-%     length(Subjects, L),
-%     L > 0,
-%     getSubjects(Subjects),
-%     nl,
-%     % assert(actualSubjects(Subjects)),
-%     addSubjectsToList(Next, End).
-
-
-% obtenerMateriasPorDificultad(X1,X2,D,X4):- materia(X1,X2,D,X4).
-% obtenerMateriasPorCreditos(X1, C, X3,X4):- materia(X1, C, X3,X4).
-% obtenerMateriaPorSemestreMinimo(X1, X2, X3, M):- materia(X1,X2,X3,M).
-
 
 isNonElement(_, []).
 isNonElement(X, [H | T]) :- dif(X, H), isNonElement(X,T).
@@ -120,6 +76,8 @@ delete(_, [], []).
 delete(Y, [H | T], Z):- member(H, Y), delete(Y, T, Z).
 delete(Y, [H | T], [H | Z]) :- isNonElement(H, Y), delete(Y, T, Z).
 
+append(0, List, List).
+append(List, 0, List).
 append([], List, List).
 append([Head|Tail], List, [Head|Rest]) :-
     append(Tail, List, Rest).
