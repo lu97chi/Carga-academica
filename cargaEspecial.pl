@@ -3,8 +3,8 @@
 :- ensure_loaded(finalCharge).
 
 % funciona pero solo si tienes multiplos de dos para los especiales
-chargeWithFailures([], [], [], _, _).
-chargeWithFailures(ESPECIALS, RCS, REMANING, START, CreditsPerSemester):-
+chargeWithFailures([], [], [], _).
+chargeWithFailures(ESPECIALS, RCS, REMANING, START):-
     append(ESPECIALS, RCS, EspRc),
     append(EspRc, REMANING, Final),
     ( ESPECIALS == 0 -> EVALLIST = []; EVALLIST = ESPECIALS),

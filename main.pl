@@ -11,10 +11,12 @@
 
 totalCreditos(36).
 
+
 % optimal charge is for not working and semester 1
 % optimal Charge is done
 start:-
     retract(totalCreditos(_)),
+    % retract(failed(_)),
     write("¿El alumno trabaja? (responda si / no)"),
     read(WORK),
     (WORK == 'si' -> 
@@ -38,7 +40,7 @@ start:-
                 finalCharge(REMANING, 0, [], START)
                 ;
                 % at this point we have a list of RCs !OR! a list of Especials
-                chargeWithFailures(ESPECIAL, RC, REMANING, START, CreditsPerSemester)
+                chargeWithFailures(ESPECIAL, RC, REMANING, START)
             )
         ) 
     ; 
@@ -54,7 +56,9 @@ start:-
                 finalCharge(REMANING, 0, [], START)
                 ;
                 % at this point we have a list of RCs !OR! a list of Especials
-                write("WORK IN PROGRESS")
+                chargeWithFailures(ESPECIAL, RC, REMANING, START)
             )
         )
     ).
+
+    

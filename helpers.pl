@@ -1,7 +1,9 @@
+:- dynamic(failed/1).
 :- ensure_loaded(materias).
 :- ensure_loaded(materiasSemestre).
 
 % [[inteligencia_artificial,4,3],[ingenieria_web,4,3],[proyecto_integrador_de_ingenieria_de_software,5,3],[residencias,0,3]]
+failed([]).
 
 member(X,[X|_]).
 member(X,[_|T]):- member(X,T).
@@ -10,7 +12,7 @@ pushToFront(Item, List, [Item | List]).
 
 % cable que separa cada semestre
 wireN(Semester):- 
-    ansi_format([underline,fg(red)], 
+    ansi_format([underline,fg(blue)], 
         '--------------- Semestre ~a ---------------', 
         [Semester]), nl.
 
@@ -27,14 +29,55 @@ writeAllSubjectsWithCredits(CarryList):-
     L > 0,
     [ Current | T] = CarryList,
     [ Name, Credits | _ ] = Current,
+    random_between(1, 10, R),
+    (R > 9 ->
+            ansi_format([underline,fg(red)], 
+            'MATERIA REPROBADA: ~a', 
+            [Name]),
+            nl,
+            write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
+            nl,
+            failed(FAILED),
+            pushToFront(Name, FAILED, NewList),
+            retract(failed(_)),
+            assert(failed(NewList))
+            ;
+            writer(Name, Credits)
+    ),
+    writeAllSubjectsWithCredits(T).
+
+recoverListAndDeleteIt():-
+    retract(failed(_)),
+    assert(failed([])).
+    
+
+% writeAllSubjectsWithCredits2(CarryList, _):-
+%     length(CarryList, L),
+%     L > 0,
+%     [ Current | T] = CarryList,
+%     [ Name, Credits | _ ] = Current,
+%     random_between(1, 10, R),
+%     (R > 8 ->
+%             ansi_format([underline,fg(red)], 
+%             'MATERIA REPROBADA: ~a', 
+%             [Name]),
+%             nl,
+%             write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
+%             nl,
+%             FailSubject = Name
+%             ;
+%             writer(Name, Credits)
+%     ),
+%     write(FailSubject),
+%     writeAllSubjectsWithCredits2(T, FailSubject).
+
+writer(Name, Credits):-
     format("Nombre de materia: ~a", [Name]),
     nl,
     format("Creditos de la materia: ~a", [Credits]),
     nl,
     write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"),
-    nl,
-    writeAllSubjectsWithCredits(T).
-
+    nl.
 
 % calcular los creditos por materia
 calcCreditsBySubjects([], 0).
@@ -81,3 +124,11 @@ append(List, 0, List).
 append([], List, List).
 append([Head|Tail], List, [Head|Rest]) :-
     append(Tail, List, Rest).
+
+flatt([], []) :- !.
+flatt([L|Ls], FlatL) :-
+    !,
+    flatt(L, NewL),
+    flatt(Ls, NewLs),
+    append(NewL, NewLs, FlatL).
+flatt(L, [L]).

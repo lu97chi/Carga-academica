@@ -51,7 +51,7 @@ materia(pruebasSoftware,4,3,7).
 materia(gestionProyectosSoftware,6,2,7).
 materia(sistemasProgramables,4,3,7).
 %%requerimientos
-materia(servicioSocial, 10,3,7).
+% materia(servicioSocial, 10,3,7).
 %semestre8
 materia(programacionLogicaFuncional,4,4,8).
 materia(administracionRedes,4,4,8).
@@ -64,7 +64,7 @@ materia(mantenimientoSoftware, 4,3,8).
 materia(inteligenciaArtificial,4,4,9).
 materia(ingenieriaWeb, 4,4,9).
 materia(proyectoIntegrador, 5,4,9).
-materia(residencia, 10,4,9).
+% materia(residencia, 10,4,9).
 
 allSubjectsInOrder([calculoDiferencial, fundamentosProgramacion, tallerEtica, matematicasDiscretas, 
     tallerAdministracion, fundamentosInvestigacion, calculoIntegral, 

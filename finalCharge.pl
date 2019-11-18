@@ -1,13 +1,16 @@
-:- dynamic(currentMateriasLeft/1).
+% :- dynamic(listKeeper/1).
 
 :- ensure_loaded(helpers).
 :- ensure_loaded(materias).
 :- ensure_loaded(main).
 
-currentMateriasLeft([]).
+% listKeeper([]).
+
+
 
 finalCharge([], 0, [], 1).
 finalCharge(Subjects, Counter, Semester, SemesterInNumber):-
+    % retract(listKeeper(_)),
     totalCreditos(Y),
     length(Subjects, L),
     [ SubjectName | T ] = Subjects,
@@ -19,13 +22,20 @@ finalCharge(Subjects, Counter, Semester, SemesterInNumber):-
         NextSemester is SemesterInNumber + 1,
         wireN(SemesterInNumber),
         formatWriteTotalCredits(AuxCounter),
-        (
-            writeAllSubjectsWithCredits(Semester) -> 
-            writeAllSubjectsWithCredits(Semester) 
+        failed(FAILSUBJECTS),
+        length(FAILSUBJECTS, FS),
+        (writeAllSubjectsWithCredits(Semester) -> writeAllSubjectsWithCredits(Semester) ; write('')),
+        % de alguna manera agregar a la lista las reprobadas
+        ( FS >  0 -> 
+            % assert(listKeeper(FAILSUBJECTS)),
+            recoverListAndDeleteIt,
+            pushToFront(FAILSUBJECTS, T, NEWT),
+            flatt(NEWT, UNILIST),
+            write(UNILIST),
+            finalCharge(UNILIST, 0, [AuxSubject], NextSemester) 
             ; 
-            write('')
-        ),
-        finalCharge(T, 0, [AuxSubject], NextSemester)
+            finalCharge(T, 0, [AuxSubject], NextSemester)
+        )
         ;
         pushToFront(AuxSubject, Semester, ActualCharge)
     ),
