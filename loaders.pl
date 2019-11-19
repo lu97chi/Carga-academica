@@ -48,3 +48,21 @@ loadFailSubjects(RC, ESPECIAL):-
 loadForSemester(START):-
     allSubjectsInOrder(ALL),
     finalCharge(ALL, 0, [], START).
+
+
+loadFinal(START, MaxSemesters, CreditsPerSemester):-
+    (START > 1 -> 
+        loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
+        ActualSubjects = REMANING,
+        loadFailSubjects(RC, ESPECIAL)
+    ;
+        allSubjectsInOrder(ALL),
+        ActualSubjects = ALL
+    ),
+    % at this point the charge is valid, has the subjects and can end the school
+    (RC = 0, ESPECIAL = 0 -> 
+        finalCharge(ActualSubjects, 0, [], START)
+    ;
+    % at this point we have a list of RCs !OR! a list of Especials
+        chargeWithFailures(ESPECIAL, RC, ActualSubjects, START)
+    ).
