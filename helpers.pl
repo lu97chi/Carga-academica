@@ -28,9 +28,10 @@ writeAllSubjectsWithCredits(CarryList):-
     length(CarryList, L),
     L > 0,
     [ Current | T] = CarryList,
-    [ Name, Credits | _ ] = Current,
+    [ Name, Credits, Diff | _ ] = Current,
     random_between(1, 10, R),
-    (R > 9 ->
+    PassOrNot is R - Diff,
+    (PassOrNot < 0 ->
             ansi_format([underline,fg(red)], 
             'MATERIA REPROBADA: ~a', 
             [Name]),

@@ -14,24 +14,25 @@ finalCharge(Subjects, Counter, Semester, SemesterInNumber):-
     totalCreditos(Y),
     length(Subjects, L),
     [ SubjectName | T ] = Subjects,
-    materia(SubjectName, Credits, _, _),
+    materia(SubjectName, Credits, Diff, _),
     AuxCounter is Counter + Credits,
-    AuxSubject = [SubjectName, Credits | _],
+    AuxSubject = [SubjectName, Credits, Diff | _],
     (
         AuxCounter > Y -> 
         NextSemester is SemesterInNumber + 1,
         wireN(SemesterInNumber),
         formatWriteTotalCredits(AuxCounter),
+        % write(Semester),
+        nl,
+        (writeAllSubjectsWithCredits(Semester) -> writeAllSubjectsWithCredits(Semester) ; write('')),
         failed(FAILSUBJECTS),
         length(FAILSUBJECTS, FS),
-        (writeAllSubjectsWithCredits(Semester) -> writeAllSubjectsWithCredits(Semester) ; write('')),
         % de alguna manera agregar a la lista las reprobadas
         ( FS >  0 -> 
             % assert(listKeeper(FAILSUBJECTS)),
             recoverListAndDeleteIt,
             pushToFront(FAILSUBJECTS, T, NEWT),
             flatt(NEWT, UNILIST),
-            write(UNILIST),
             finalCharge(UNILIST, 0, [AuxSubject], NextSemester) 
             ; 
             finalCharge(T, 0, [AuxSubject], NextSemester)
@@ -52,9 +53,9 @@ finalCharge(Subjects, Counter, Semester, SemesterInNumber):-
             writeAllSubjectsWithCredits(ActualCharge) 
             ; 
             write('')
-        );
+        )
+        ;
         write('')
     ),
     L > 0,
-
     finalCharge(T, AuxCounter, ActualCharge, SemesterInNumber).

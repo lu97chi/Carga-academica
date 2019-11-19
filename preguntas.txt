@@ -13,3 +13,6 @@ Semestre            Trabaja          DefaultData           Status
 
 
 checks with Rc or Especial
+
+
+checks

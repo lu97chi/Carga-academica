@@ -30,11 +30,11 @@ justEspecials(Times, Especials, Start):-
     wireN(Start),
     calcCreditsBySubjects([SP1,SP2 | []], Credits),
     formatWriteTotalCredits(Credits),
-    materia(SP1, Credits1, _, _),
-    materia(SP2, Credits2, _, _),
+    materia(SP1, Credits1, Diff1, _),
+    materia(SP2, Credits2, Diff2, _),
     (
-        writeAllSubjectsWithCredits([[SP1, Credits1 | _], [SP2, Credits2 | _]]) ->
-        writeAllSubjectsWithCredits([[SP1, Credits1 | _], [SP2, Credits2 | _]]) ;
+        writeAllSubjectsWithCredits([[SP1, Credits1, Diff1 | _], [SP2, Credits2, Diff2 | _]]) ->
+        writeAllSubjectsWithCredits([[SP1, Credits1, Diff1 | _], [SP2, Credits2, Diff2 | _]]) ;
         write('')
     ),
     justEspecials(NextTime, RSP, NextSemester).

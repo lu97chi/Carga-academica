@@ -33,8 +33,7 @@ start:-
             finalCharge(ALL, 0, [], START) 
             ;
             loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
-            % at this point the charge is valid, 
-            %has the subjects and can end the school
+            % at this point the charge is valid, has the subjects and can end the school
             loadFailSubjects(RC, ESPECIAL),
             (RC = 0, ESPECIAL = 0 -> 
                 finalCharge(REMANING, 0, [], START)
@@ -46,8 +45,9 @@ start:-
     ; 
     assert(totalCreditos(30)),
         (
-            START == 1 -> 
-            optimalCharge(START, [], MaxSemesters) 
+                START == 1 -> 
+                allSubjectsInOrder(ALL),
+                finalCharge(ALL, 0, [], START) 
             ;
             loadRequeriments(START, MaxSemesters, CreditsPerSemester, REMANING),
             % at this point the charge is valid, has the subjects and can end the school

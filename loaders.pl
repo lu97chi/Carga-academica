@@ -4,6 +4,8 @@
 :- ensure_loaded(helpers).
 :- ensure_loaded(defaults).
 :- ensure_loaded(anyPoint).
+:- ensure_loaded(finalCharge).
+
 
 loadRequeriments(START, MaxSemesters,CreditsPerSemester,REMANING):-
     allSubjectsInOrder(ALL), 
@@ -42,3 +44,7 @@ loadFailSubjects(RC, ESPECIAL):-
         ;
         ESPECIAL = 0 
     ).
+
+loadForSemester(START):-
+    allSubjectsInOrder(ALL),
+    finalCharge(ALL, 0, [], START).
