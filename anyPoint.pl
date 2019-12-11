@@ -9,10 +9,26 @@
 
 actualSubjects.
 
+materiaEspecialidad(ingeneriaSoftware).
+
 % se usa este si no se quiere usar la carga por defecto
 insertSubjectsByKeyboard(SUBJECTS):-
     write("Ingrese las materias cursadas, con el formato [nombre_materia, nombre_materia2]"),
     read(SUBJECTS).
+%182
+validateIfTSU([], _).
+validateIfTSU(SUBJECTS, XP):-
+    [H | T] = SUBJECTS,
+    calcCreditsBySubjects(SUBJECTS, TOTAL),
+    ((H == XP, TOTAL >= 4) -> 
+        write("Deberias solicitar TSU"),
+        false
+        ;
+    validateIfTSU(T, XP)),
+    throw("NO PODRAS GRADUARTE, SORRY").
+    
+
+
 
 validateIfCouldEnd(Start,End, CreditsPerSemester, SUBJECTS):- 
     write("Desea usar el ejemplo de materias? (si = usar por defecto, no = entrar por teclado)"),
@@ -22,11 +38,11 @@ validateIfCouldEnd(Start,End, CreditsPerSemester, SUBJECTS):-
         insertSubjectsByKeyboard(SUBJECTS)),
     calcCreditsBySubjects(SUBJECTS, TotalCreditsSoFar),
     Remaning is End - Start,
-    write(Remaning),
     PosibleCredits is Remaning * 36,
     RemaningCredits is 260 - TotalCreditsSoFar,
     (PosibleCredits < RemaningCredits -> 
-        throw("No podras graduarte, sorry")
+        materiaEspecialidad(XP),
+        validateIfTSU(SUBJECTS, XP)  
         ; 
         (validateSubjectsGiven(SUBJECTS, SUBJECTS) -> 
             write("OK, Empezemos") ;

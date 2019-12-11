@@ -133,3 +133,4 @@ flatt([L|Ls], FlatL) :-
     flatt(Ls, NewLs),
     append(NewL, NewLs, FlatL).
 flatt(L, [L]).
+

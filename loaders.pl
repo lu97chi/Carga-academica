@@ -66,3 +66,8 @@ loadFinal(START, MaxSemesters, CreditsPerSemester):-
     % at this point we have a list of RCs !OR! a list of Especials
         chargeWithFailures(ESPECIAL, RC, ActualSubjects, START)
     ).
+
+%tsu
+%semestre 3 y 5 cada semestre no trabaja, 2 y 4 trabaja
+
+% tsu es que se te acabe la carga y hayas hecho la materia de 

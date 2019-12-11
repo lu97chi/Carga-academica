@@ -8,6 +8,8 @@
 % :- ensure_loaded(cargaTrabajo).
 :- ensure_loaded(finalCharge).
 :- ensure_loaded(cargaEspecial).
+:- ensure_loaded(helpers).
+
 
 totalCreditos(36).
 
@@ -16,6 +18,7 @@ totalCreditos(36).
 % optimal Charge is done
 start:-
     retract(totalCreditos(_)),
+    retract(failed(_)),
     % retract(failed(_)),
     write("¿El alumno trabaja? (responda si / no)"),
     read(WORK),
